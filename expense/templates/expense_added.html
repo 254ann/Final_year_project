@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h1>Expense Added Successfully</h1>
+            <h4>Your expense entry has been successfully added.</h4>
+            <a href="{% url 'view_expense' %}" class="btn btn-secondary">View Expense Entries</a>
+            <a href="{% url 'add_expense' %}" class="btn btn-primary">Add Another Expense</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

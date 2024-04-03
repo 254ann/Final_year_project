@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table table-bordered table-primary table-striped">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Payment Mode</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr class="table-primary">
+                    <tr>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.mode }}</td>
+                        <td>{{ expense.date_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><b>Total Expense: ksh. {{ total_expense }}</b></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

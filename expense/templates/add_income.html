@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Add Income</h1>
+            <a href="{% url 'view_income' %}" class="btn btn-secondary mb-3">View Income</a>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.category.id_for_label }}" class="form-label fw-bold">Category</label>
+                    {{ form.category }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.amount.id_for_label }}" class="form-label fw-bold">Amount</label>
+                    {{ form.amount }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.mode.id_for_label }}" class="form-label fw-bold">Mode</label>
+                    {{ form.mode }}
+                </div>
+                <div class="mb-3">
+                    <label for="{{ form.date_time.id_for_label }}" class="form-label fw-bold">Date and Time</label>
+                    {{ form.date_time }}
+                </div>
+                <input type="hidden" name="redirect_to_all_transactions" value="True">
+                <button type="submit" class="btn btn-primary">Save and View All Transactions</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

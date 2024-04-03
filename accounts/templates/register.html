@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  {% if page == "login" %}
+  <div class="login-page">
+    <form method="post" action="">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="username" class="form-label fs-5 fw-bold">Username</label>
+        <input type="text" class="form-control" name="username" placeholder="Enter Username" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label fs-5 fw-bold">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter Password" />
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary fs-5 fw-bold">Login</button>
+      </div>
+    </form>
+    <p class="fs-5">Haven't signed up yet?</p>
+    <a href="{% url 'register' %}" class="btn btn-link fs-5 fw-bold">Register</a>
+  </div>
+  {% else %}
+  <div>
+    <form method="POST" novalidate class="row g-3">
+      {% csrf_token %}
+      <h2 class="mb-4 fs-2 fw-bold">Sign Up</h2>
+
+      {% for field in form %}
+      <div class="col-md-6">
+        {% if field.errors %}
+        <ul class="errorlist">
+          {% for error in field.errors %}
+          <li class="fs-5 fw-bold">{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <label for="{{ field.id_for_label }}" class="form-label fs-5 fw-bold">{{ field.label }}</label>
+        {{ field }}
+      </div>
+      {% endfor %}
+      <div class="col-12">
+        <input type="submit" class="btn btn-primary fs-5 fw-bold" value="Register" />
+      </div>
+    </form>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

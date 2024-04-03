@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Bill Reminder List</h1>
+    <table class="table table-bordered table-striped table-primary">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Due Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reminder in bill_reminders %}
+            <tr>
+                <td>{{ reminder.title }}</td>
+                <td>{{ reminder.category }}</td>
+                <td>ksh.{{ reminder.amount }}</td>
+                <td>{{ reminder.due_date }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_bill_reminder' reminder.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="reminder_id" value="{{ reminder.id }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

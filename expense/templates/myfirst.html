@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Welcome to Pesa Manager</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a href="{% url 'add_income' %}" class="btn btn-primary btn-lg btn-block">Add Income</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <a href="{% url 'add_expense' %}" class="btn btn-primary btn-lg btn-block">Add Expense</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <a href="{% url 'all_transactions' %}" class="btn btn-primary btn-lg btn-block">View Your Previous Transactions</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

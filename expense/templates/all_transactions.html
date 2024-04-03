@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}
+    All Transactions
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <!-- Month Name -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center bg-dark text-white">
+            <h1>{{ month_name }} Transactions:</h1>
+        </div>
+    </div>
+    
+    <!-- Income Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center bg-dark text-white">Income</h2>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Category</th>
+                        <th>Mode</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for income in incomes %}
+                    <tr class="table-primary">
+                        <td>{{ income.category }}</td>
+                        <td>{{ income.mode }}</td>
+                        <td>ksh. {{ income.amount }}</td>
+                        <td>
+                            <form action="{% url 'delete_income' income.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No income transactions yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="text-center fw-bold">Total Income: ksh. <span class="fw-bold">{{ total_income }}</span></p>
+        </div>
+    </div>
+    
+    <!-- Space between the tables -->
+    <div class="my-5"></div>
+    
+    <!-- Expenses Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center bg-dark text-white">Expenses</h2>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Category</th>
+                        <th>Mode</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr class="table-primary">
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.mode }}</td>
+                        <td>ksh.{{ expense.amount }}</td>
+                        <td>
+                            <form action="{% url 'delete_expense' expense.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No expense transactions yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="text-center fw-bold">Total Expense: ksh.<span class="fw-bold">{{ total_expense }}</span></p>
+        </div>
+    </div>
+
+    <!-- Percentage Spent -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center bg-dark text-white">
+            <h2>Percentage of Income Spent on Expenditure</h2>
+            <p>{{ percentage_spent }}%</p>
+            <p class="fw-bold">{{ notification }}</p>
+        </div>
+    </div>
+
+    <!-- Balance -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center bg-dark text-white">
+            <h2>Balance = {{ balance }}</h2>
+        </div>
+    </div>
+
+    <!-- Add Income and Expense Buttons -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 text-center">
+            <a href="{% url 'add_income' %}" class="btn btn-primary">Add Income</a>
+            <br><br>
+            <a href="{% url 'add_expense' %}" class="btn btn-primary">Add Expense</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

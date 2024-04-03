@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Manage Your Bills</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a href="{% url 'add_bill_reminder' %}" class="btn btn-primary btn-lg btn-block">Add A Bill Reminder</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <a href="{% url 'bill_reminder_list' %}" class="btn btn-primary btn-lg btn-block">View your Bill Reminders</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

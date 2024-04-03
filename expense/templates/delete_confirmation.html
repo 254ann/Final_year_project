@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Are you sure you want to delete this {{ type }} transaction?</h1>
+    <form id="delete-form" action="{% if type == 'income' %}{% url 'delete_income' income.id %}{% else %}{% url 'delete_expense' expense.id %}{% endif %}" method="post">
+        {% csrf_token %}
+        <button id="delete-button" type="submit">Yes, Delete</button>
+        <a id="cancel-link" href="{% url 'all_transactions' %}">Cancel</a>
+    </form>
+
+    <script>
+        // Add event listener to the Cancel link to redirect to all_transactions.html
+        document.getElementById("cancel-link").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            window.location.href = "{% url 'all_transactions' %}"; // Redirect to all_transactions.html
+        });
+
+        // Add event listener to the Delete button to redirect to all_transactions.html after deletion
+        document.getElementById("delete-button").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            // Submit the form
+            document.getElementById("delete-form").submit();
+            // Redirect to all_transactions.html after a short delay
+            setTimeout(function() {
+                window.location.href = "{% url 'all_transactions' %}";
+            }, 1000); // You can adjust the delay as needed
+        });
+    </script>
+{% endblock content %}
